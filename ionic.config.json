@@ -1,0 +1,7 @@
+{
+  "name": "desafiomedgroup2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
