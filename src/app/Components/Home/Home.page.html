@@ -6,35 +6,36 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" color="primary">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Prefeitura do Interior</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <h1>Cadastro Integrado de Escolas</h1>
+  <h1>Integração de Escolas</h1>
 
   <div padding>
     <h1>Login</h1>
     <form #form="ngForm" (ngSubmit)="submitForm(form)">
       <ion-grid>
-        <div *ngIf="hasError()">
-          <span class="glyphicon glyphicon-remove form-control-feedback fix-error-icon"></span>
-          <div class="error-msg"> {{errorMsg}} </div>
+        <div *ngIf="hasMsg()">
+          <div class="msg"> {{msg}} </div>
         </div>
         <ion-row color="primary" justify-content-center>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
             <div padding>
               <ion-item>
-                <ion-input name="username" type="text" placeholder="Username" ngModel required></ion-input>
+                <ion-input name="username" type="text" placeholder="Nome de usuário" ngModel required></ion-input>
               </ion-item>
               <ion-item>
-                <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+                <ion-input name="password" type="password" placeholder="Senha" ngModel required></ion-input>
               </ion-item>
             </div>
             <div padding>
-              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Register</ion-button>
+              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">
+                Login
+              </ion-button>
             </div>
           </ion-col>
         </ion-row>

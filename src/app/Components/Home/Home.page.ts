@@ -9,30 +9,32 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['../../app.component.scss']
 })
 export class HomePage {
-  @Input() errorMsg: string = "";
+  @Input() msg: string = "";
   formInput: FormGroup;
 
   constructor(private auth: AuthService, private nav: NavController) { }
 
-  hasError(): boolean {
-    return this.errorMsg !== "" ? true : false;
+  public hasMsg(): boolean {
+    return this.msg !== "" ? true : false;
   }
-  submitForm(form): void {
+  
+  public submitForm(form): void {
     const { username, password } = form.value;
     this.auth.authenticate(username, password)
       .then((auth: boolean) => {
         if (auth) {
-          this.errorMsg = "";
+          this.msg = "";
           this.nav.navigateRoot("/routes/crud-route");
         } else {
-          this.errorMsg = "Login Invalido";
+          this.msg = "Login Invalido";
         }
       })
       .catch(e => {
-        this.errorMsg = "Houve um erro durante a autenticação!";
+        this.msg = "Houve um erro durante a autenticação!";
       });
   }
-  clearToken(): void {
+
+  public clearToken(): void {
     this.auth.clearToken();
   }
 }
