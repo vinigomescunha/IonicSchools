@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Colegio } from 'src/app/Models/Colegio';
 import { DataService } from 'src/app/Services/DataService';
-import { TurmaModel } from 'src/app/Models/Turma';
+import { Turma } from 'src/app/Models/Turma';
 
 @Component({
   selector: 'app-school',
@@ -13,7 +13,7 @@ export class SchoolPage {
   public schools: Colegio[] = [];
   // lista de turmas
   private classes: {
-    [id: string]: TurmaModel[]
+    [id: string]: Turma[]
   } = {};
   // paginação de colegios
   public page: number = 1;
@@ -78,7 +78,7 @@ export class SchoolPage {
     return this.action === Actions.FORM ? ActionsLabel.LIST : ActionsLabel.FORM;
   }
   // obtenho as turmas de determinado colegio na lista de turmas do componente
-  public getClasses(collegeId): Array<TurmaModel> {
+  public getClasses(collegeId): Array<Turma> {
     return this.classes[collegeId] ? this.classes[collegeId] : [];
   }
   // carrego as turmas de determinado colegio
