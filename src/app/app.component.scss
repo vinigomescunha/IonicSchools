@@ -1,20 +1,24 @@
 [school-list] {
-    padding: .4rem 0;
+    padding: 0.4rem 0;
     [school-item] {
-        padding: .4rem .8rem;
+        padding: 0.4rem 0.8rem;
+        [school-header] {
+            border: 1px solid #333;
+            border-top-width: 4px;
+        }
     }
 }
 [school-form] {
-    padding: .2vw;
+    padding: 0.2vw;
 }
 [school-classes] {
-    margin: .5rem 1rem;
+    margin: 0.5rem 1rem;
     border: 1px solid #333;
-    padding: 0.2rem .7rem;
+    padding: 0.2rem 0.7rem;
 }
 ion-icon {
     cursor: pointer;
 }
 [bordered] {
-    background: rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.1);
 }
