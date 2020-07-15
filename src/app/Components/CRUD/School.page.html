@@ -12,25 +12,68 @@
       <ion-title size="large">Colegios</ion-title>
     </ion-toolbar>
   </ion-header>
-  <button (click)="toggleSchoolFormList()" [innerText]="toggleSchoolFormListLabel()"></button>
+  <ion-button (click)="toggleSchoolFormList()" [innerText]="toggleSchoolFormListLabel()"></ion-button>
   <div *ngIf="isDisplayList()" school-list>
     <ion-grid>
       <ion-row>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div school-item padding *ngFor="let colegio of getSchools()">
-            {{ colegio.id}} - {{ colegio.name }}
-            <ion-icon title="Buscar Turmas" name="refresh-outline" (click)="loadClasses(colegio.id)"></ion-icon>
-            <ion-icon title="Nova Turma" name="add"></ion-icon>
-
-            <div school-classes *ngFor="let turma of getClasses(colegio.id)">
-              <div> {{ turma.id}} - {{ turma.name }}
-                <ion-icon title="Remover Turma" name="trash-outline"></ion-icon>
-                <ion-icon title="Editar Colegio" name="document-outline"></ion-icon>
-              </div>
-            </div>
-          </div>
-          <div>
-            <button [disabled]="hasDisplayAllSchools()" (click)="scrollMore()">Mais</button>
+          <div school-item padding>
+            <ion-grid>
+              <ion-row>
+                <ion-col bordered>
+                  <div>ID</div>
+                </ion-col>
+                <ion-col bordered>
+                  <div>Nome</div>
+                </ion-col>
+                <ion-col bordered>
+                  <div>Ações</div>
+                </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let colegio of getSchools()">
+                <ion-col bordered>
+                  <div>
+                    {{ colegio.id}}
+                  </div>
+                </ion-col>
+                <ion-col bordered>
+                  <div>
+                    {{ colegio.name }}
+                  </div>
+                </ion-col>
+                <ion-col bordered>
+                  <div>
+                    <ion-icon title="Buscar Turmas" name="search" (click)="loadClasses(colegio.id)"></ion-icon>
+                    <ion-icon title="Nova Turma" name="add"></ion-icon>
+                  </div>
+                </ion-col>
+                <ion-col bordered size="12">
+                  <ion-row school-classes *ngFor="let turma of getClasses(colegio.id)">
+                    <ion-col bordered>
+                      <div>
+                        {{ turma.id}}
+                      </div>
+                    </ion-col>
+                    <ion-col bordered>
+                      <div>
+                        {{ turma.name }}
+                      </div>
+                    </ion-col>
+                    <ion-col bordered>
+                      <div>
+                        <ion-icon title="Remover Turma" name="trash"></ion-icon>
+                        <ion-icon title="Editar Turma" name="document"></ion-icon>
+                      </div>
+                    </ion-col>
+                  </ion-row>
+                </ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col bordered size="12">
+                  <ion-button  size="medium" expand="block" [disabled]="hasDisplayAllSchools()" (click)="scrollMore()">Mais</ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
           </div>
         </ion-col>
       </ion-row>
@@ -42,12 +85,12 @@
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div padding>
             <ion-item>
-              <ion-input name="name" type="text" placeholder="School Name" ngModel required></ion-input>
+              <ion-input name="name" type="text" placeholder="Nome da Escola" ngModel required></ion-input>
             </ion-item>
           </div>
           <div padding>
             <ion-button size="medium" expand="block" type="submit" [disabled]="form.invalid">
-              Add
+              Adicionar Escola
             </ion-button>
           </div>
         </ion-col>
