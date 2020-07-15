@@ -19,7 +19,7 @@
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div school-item padding *ngFor="let colegio of getSchools()">
             {{ colegio.id}} - {{ colegio.name }}
-            <ion-icon title="Ver Turmas" name="eye-outline" (click)="loadClasses(colegio.id)"></ion-icon>
+            <ion-icon title="Buscar Turmas" name="refresh-outline" (click)="loadClasses(colegio.id)"></ion-icon>
             <ion-icon title="Nova Turma" name="add"></ion-icon>
 
             <div school-classes *ngFor="let turma of getClasses(colegio.id)">
