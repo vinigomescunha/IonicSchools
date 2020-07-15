@@ -1,0 +1,172 @@
+{
+  "turmas": [
+    {
+      "id": 1,
+      "name": "Turma-1",
+      "collegeId": 1
+    },
+    {
+      "id": 2,
+      "name": "Turma-2",
+      "collegeId": 2
+    },
+    {
+      "id": 3,
+      "name": "Turma-3",
+      "collegeId": 1
+    },
+    {
+      "id": 4,
+      "name": "Turma-4",
+      "collegeId": 3
+    },
+    {
+      "id": 5,
+      "name": "Turma-5",
+      "collegeId": 2
+    },
+    {
+      "username": "fake",
+      "password": "123456",
+      "id": 6
+    }
+  ],
+  "colegios": [
+    {
+      "id": 1,
+      "name": "school 1"
+    },
+    {
+      "id": 2,
+      "name": "school 2"
+    },
+    {
+      "id": 3,
+      "name": "school 3"
+    },
+    {
+      "name": "asdfdfd",
+      "id": 4
+    },
+    {
+      "name": "ccc",
+      "id": 5
+    },
+    {
+      "name": "asd",
+      "id": 6
+    },
+    {
+      "name": "asdcc",
+      "id": 7
+    },
+    {
+      "name": "ccasdcc",
+      "id": 8
+    },
+    {
+      "name": "ccasdcc",
+      "id": 9
+    },
+    {
+      "name": "ccasdcc",
+      "id": 10
+    },
+    {
+      "name": "ccasdcc",
+      "id": 11
+    },
+    {
+      "name": "ccasdcc",
+      "id": 12
+    },
+    {
+      "name": "ccasdcc",
+      "id": 13
+    },
+    {
+      "name": "ccasdcc",
+      "id": 14
+    },
+    {
+      "name": "ccasdcc",
+      "id": 15
+    },
+    {
+      "name": "ccasdcc",
+      "id": 16
+    },
+    {
+      "name": "ccasdcc",
+      "id": 17
+    },
+    {
+      "name": "ccasdcc",
+      "id": 18
+    },
+    {
+      "name": "ccasdcc",
+      "id": 19
+    },
+    {
+      "name": "ccasdcc",
+      "id": 20
+    },
+    {
+      "name": "ccasdcc",
+      "id": 21
+    },
+    {
+      "name": "ccasdcc",
+      "id": 22
+    },
+    {
+      "name": "ccasdcc",
+      "id": 23
+    },
+    {
+      "name": "ccasdcc",
+      "id": 24
+    },
+    {
+      "name": "ccasdcc",
+      "id": 25
+    },
+    {
+      "name": "ccasdcc",
+      "id": 26
+    },
+    {
+      "name": "ccasdcc",
+      "id": 27
+    },
+    {
+      "name": "ccasdcc",
+      "id": 28
+    },
+    {
+      "name": "ccasdcc",
+      "id": 29
+    },
+    {
+      "name": "ccasdcc",
+      "id": 30
+    },
+    {
+      "name": "ccasdcc",
+      "id": 31
+    }
+  ],
+  "users": [
+    {
+      "username": "fake",
+      "password": "123456",
+      "token": "9b8cd22de34d90d25ec90f805a7305d0"
+    },
+    {
+      "username": "fake2",
+      "password": "123a5%",
+      "token": "9b8cd22de34d90d25ec90f805a7305d0323"
+    }
+  ]
+}
