@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { Colegio } from 'src/app/Models/Colegio';
 import { DataService } from 'src/app/Services/DataService';
+import { TurmaModel } from 'src/app/Models/Turma';
 
 @Component({
   selector: 'app-school',
@@ -9,46 +9,43 @@ import { DataService } from 'src/app/Services/DataService';
   styleUrls: ['../../app.component.scss'] // dessa forma centralizo os estilos, fica um local somente para edição
 })
 export class SchoolPage {
+  // lista de colegios
   public schools: Colegio[] = [];
-
+  // lista de turmas
+  private classes: {
+    [id: string]: TurmaModel[]
+  } = {};
+  // paginação de colegios
   public page: number = 1;
-
+  // limite da paginação de colegios
   public limit: number = 2;
-
+  // mensagem do formulario
   public mesg: string = "";
-
+  // ação tomada na pagina, default listar colegios
   public action: Actions = Actions.LIST;
 
-  constructor(public nav: NavController, private data: DataService) { }
-
+  constructor(private data: DataService) { }
+  // hook ionic quando entra na pagina, @see https://ionicframework.com/docs/angular/lifecycle
   public ionViewWillEnter() {
     this.retrieveSchools();
   }
-
-  public retrieveSchools(): Promise<any> { // esse é Promise de any mesmo, ou Promise<void> :/
+  // busco os colegios na API e coloco na lista de colegios do componente
+  public retrieveSchools(): Promise<any> {
     return this.data.getSchools().then(schools => this.schools = schools); //nesse caso n trato o catch pq retorno vazio em caso de erro
   }
-
-  public goToClass(id: string): void {
-    this.nav.navigateRoot(`/routes/crud-route/class?collegeId=${id}`);
-  }
-
+  // busco os colegios na lista de colegios do componente filtrado pela navegação
   public getSchools(): Array<Colegio> {
-    return this.schools.slice(0, (this.page * this.limit));
+    return this.schools.reverse().slice(0, (this.page * this.limit));
   }
-
+  // logica pra saber quando termina a paginação
   public hasDisplayAllSchools(): boolean {
     return (this.page * this.limit) >= this.schools.length;
   }
-
-  public scrollMore() {
+  // scroll da paginação
+  public scrollMore(): void {
     this.page++;
   }
-
-  public setPage(page: number): void {
-    this.page = page;
-  }
-
+  // adicionar colegio, CRUD
   public addSchool(form): void {
     const { name } = form.value;
     this.data.addSchool({ name })
@@ -64,23 +61,43 @@ export class SchoolPage {
         this.mesg = "Houve um erro no processamento, tente mais tarde!";
       });
   }
-
-  public isDisplay(action: Actions): boolean {
-    return this.action === action;
+  // logica se é para mostrar formulario de add colegio
+  public isDisplayForm(): boolean {
+    return this.action === Actions.FORM;
   }
-
-  public toggleForm(): void {
-    // nesse caso so tem duas alternativas
-    this.action = this.action === Actions.DISPLAY ? Actions.LIST: Actions.DISPLAY;
+  // logica se é para mostrar lista de colegios
+  public isDisplayList(): boolean {
+    return this.action === Actions.LIST;
   }
-
-  public toggleFormLabel(): string {
-    return this.action === Actions.DISPLAY ? '': '';
+  // botao toggle form e lista de colegios
+  public toggleSchoolFormList(): void {
+    this.action = this.action === Actions.FORM ? Actions.LIST : Actions.FORM;
+  }
+  // botão toggle form e lista de colegios
+  public toggleSchoolFormListLabel(): string {
+    return this.action === Actions.FORM ? ActionsLabel.LIST : ActionsLabel.FORM;
+  }
+  // obtenho as turmas de determinado colegio na lista de turmas do componente
+  public getClasses(collegeId): Array<TurmaModel> {
+    return this.classes[collegeId] ? this.classes[collegeId] : [];
+  }
+  // carrego as turmas de determinado colegio
+  public loadClasses(collegeId): void {
+    this.data.getClasses(collegeId).then(classes => {
+      // pra não poluir a tela eu limpo as classes(turmas buscadas anteriormente)
+      this.classes = {};
+      this.classes[collegeId] = classes;
+    });
   }
 
 }
-
+// enumerado de ações na pagina de colegios, listar colegios e form add colegios
 enum Actions {
   LIST = 'list',
-  DISPLAY = 'display'
+  FORM = 'form'
+}
+// enumerado de labels da pagina de colegios, tem relação c/ as acoes
+enum ActionsLabel {
+  LIST = 'Listar Escolas',
+  FORM = 'Adicionar Escola'
 }

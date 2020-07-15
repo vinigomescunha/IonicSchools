@@ -6,25 +6,30 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true"  color="primary">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Colegios</ion-title>
     </ion-toolbar>
   </ion-header>
-  <button (click)="toggleForm()" [innerText]="toggleFormLabel()"></button>
-  <div  *ngIf="isDisplay('list')" school-list>
+  <button (click)="toggleSchoolFormList()" [innerText]="toggleSchoolFormListLabel()"></button>
+  <div *ngIf="isDisplayList()" school-list>
     <div school-item *ngFor="let colegio of getSchools()">
       <div>
         {{ colegio.id}} - {{ colegio.name }}
-        <button ion-button (click)="goToClass(colegio.id)">Ver Turmas</button>
+        <button ion-button  size="medium" (click)="loadClasses(colegio.id)">Ver Turmas</button>
+        <div *ngFor="let turma of getClasses(colegio.id)">
+          <div>
+            {{ turma.id}} - {{ turma.name }} <button ion-button>Editar</button>
+          </div>
+        </div>
       </div>
     </div>
     <div><button [disabled]="hasDisplayAllSchools()" (click)="scrollMore()">Mais</button></div>
   </div>
-  <form *ngIf="isDisplay('form')" school-form #form="ngForm" (ngSubmit)="addSchool(form)">
+  <form *ngIf="isDisplayForm()" school-form #form="ngForm" (ngSubmit)="addSchool(form)">
     <ion-grid>
-      <ion-row color="primary" justify-content-center>
+      <ion-row>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div padding>
             <ion-item>
@@ -32,7 +37,9 @@
             </ion-item>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Add</ion-button>
+            <ion-button size="medium" type="submit" [disabled]="form.invalid" expand="block">
+              Add
+            </ion-button>
           </div>
         </ion-col>
       </ion-row>
