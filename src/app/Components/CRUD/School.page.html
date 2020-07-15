@@ -6,7 +6,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true"  color="primary">
+<ion-content [fullscreen]="true" color="primary">
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Colegios</ion-title>
@@ -14,18 +14,27 @@
   </ion-header>
   <button (click)="toggleSchoolFormList()" [innerText]="toggleSchoolFormListLabel()"></button>
   <div *ngIf="isDisplayList()" school-list>
-    <div school-item *ngFor="let colegio of getSchools()">
-      <div>
-        {{ colegio.id}} - {{ colegio.name }}
-        <button ion-button  size="medium" (click)="loadClasses(colegio.id)">Ver Turmas</button>
-        <div *ngFor="let turma of getClasses(colegio.id)">
-          <div>
-            {{ turma.id}} - {{ turma.name }} <button ion-button>Editar</button>
+    <ion-grid>
+      <ion-row>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div school-item padding *ngFor="let colegio of getSchools()">
+            {{ colegio.id}} - {{ colegio.name }}
+            <ion-icon title="Ver Turmas" name="eye-outline" (click)="loadClasses(colegio.id)"></ion-icon>
+            <ion-icon title="Nova Turma" name="add"></ion-icon>
+
+            <div school-classes *ngFor="let turma of getClasses(colegio.id)">
+              <div> {{ turma.id}} - {{ turma.name }}
+                <ion-icon title="Remover Turma" name="trash-outline"></ion-icon>
+                <ion-icon title="Editar Colegio" name="document-outline"></ion-icon>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <div><button [disabled]="hasDisplayAllSchools()" (click)="scrollMore()">Mais</button></div>
+          <div>
+            <button [disabled]="hasDisplayAllSchools()" (click)="scrollMore()">Mais</button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
   <form *ngIf="isDisplayForm()" school-form #form="ngForm" (ngSubmit)="addSchool(form)">
     <ion-grid>
@@ -37,7 +46,7 @@
             </ion-item>
           </div>
           <div padding>
-            <ion-button size="medium" type="submit" [disabled]="form.invalid" expand="block">
+            <ion-button size="medium" expand="block" type="submit" [disabled]="form.invalid">
               Add
             </ion-button>
           </div>

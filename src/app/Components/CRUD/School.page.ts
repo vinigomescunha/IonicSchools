@@ -14,7 +14,7 @@ export class SchoolPage {
   // lista de turmas
   private classes: {
     [id: string]: Turma[]
-  } = {};
+  } = {}; 
   // paginação de colegios
   public page: number = 1;
   // limite da paginação de colegios
@@ -27,6 +27,7 @@ export class SchoolPage {
   constructor(private data: DataService) { }
   // hook ionic quando entra na pagina, @see https://ionicframework.com/docs/angular/lifecycle
   public ionViewWillEnter() {
+    // this.page = 1;  // ao entrar reinicio a paginacao ao inicio
     this.retrieveSchools();
   }
   // busco os colegios na API e coloco na lista de colegios do componente
@@ -85,7 +86,7 @@ export class SchoolPage {
   public loadClasses(collegeId): void {
     this.data.getClasses(collegeId).then(classes => {
       // pra não poluir a tela eu limpo as classes(turmas buscadas anteriormente)
-      this.classes = {};
+      // this.classes = {};
       this.classes[collegeId] = classes;
     });
   }
