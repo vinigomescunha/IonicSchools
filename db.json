@@ -34,18 +34,18 @@
   "colegios": [
     {
       "id": 1,
-      "name": "school 1"
+      "name": "Escola 1"
     },
     {
       "id": 2,
-      "name": "school 2"
+      "name": "Escola 2"
     },
     {
       "id": 3,
-      "name": "school 3"
+      "name": "Escola 3"
     },
     {
-      "name": "a",
+      "name": "Escola 4",
       "id": 4
     }
   ],
