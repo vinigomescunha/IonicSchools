@@ -14,7 +14,7 @@ export class SchoolPage {
   // lista de turmas
   private classes: {
     [id: string]: Turma[]
-  } = {}; 
+  } = {};
   // paginação de colegios
   public page: number = 1;
   // limite da paginação de colegios
@@ -46,22 +46,6 @@ export class SchoolPage {
   public scrollMore(): void {
     this.page++;
   }
-  // adicionar colegio, CRUD
-  public addSchool(form): void {
-    const { name } = form.value;
-    this.data.addSchool({ name })
-      .then((isAdd: boolean) => {
-        if (isAdd) {
-          this.retrieveSchools();
-          this.mesg = "Adicionado com sucesso!";
-        } else {
-          this.mesg = "Ocorreu um erro ao adicionar o Colegio";
-        }
-      })
-      .catch(e => {
-        this.mesg = "Houve um erro no processamento, tente mais tarde!";
-      });
-  }
   // logica se é para mostrar formulario de add colegio
   public isDisplayForm(): boolean {
     return this.action === Actions.FORM;
@@ -89,6 +73,18 @@ export class SchoolPage {
       // this.classes = {};
       this.classes[collegeId] = classes;
     });
+  }
+
+  public getInfo(): string {
+    return `[Display ${this.page} of ${Math.round(this.schools.length / this.limit)}] [Total: ${this.schools.length}]`;
+  }
+  /**
+   * Representa um event emitter que trata um bind de duas etapas no child component
+   * @param status 
+   */
+  public childMdifyStatus(status: boolean): void {
+    this.mesg = status ? 'Evento concluido com sucesso': 'Houve um problema ao processar e evento';
+    this.retrieveSchools();
   }
 
 }

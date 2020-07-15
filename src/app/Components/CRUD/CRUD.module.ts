@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { SchoolPage } from './School.page';
 
 import { CRUDPageRoutingModule } from './CRUD-routing.module';
+import { SchoolFormAddPage } from './SchoolFormAdd.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,6 @@ import { CRUDPageRoutingModule } from './CRUD-routing.module';
     FormsModule,
     CRUDPageRoutingModule
   ],
-  declarations: [SchoolPage]
+  declarations: [SchoolPage, SchoolFormAddPage]
 })
 export class CRUDPageModule {}

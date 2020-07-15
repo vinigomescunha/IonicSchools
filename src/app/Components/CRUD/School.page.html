@@ -12,7 +12,10 @@
       <ion-title size="large">Colegios</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-button (click)="toggleSchoolFormList()" [innerText]="toggleSchoolFormListLabel()"></ion-button>
+  <ion-item>
+    <ion-label>{{getInfo()}}</ion-label>
+    <ion-button (click)="toggleSchoolFormList()" [innerText]="toggleSchoolFormListLabel()"></ion-button>
+  </ion-item>
   <div *ngIf="isDisplayList()" school-list>
     <ion-grid>
       <ion-row>
@@ -20,13 +23,13 @@
           <div school-item padding>
             <ion-grid>
               <ion-row>
-                <ion-col bordered>
+                <ion-col bordered school-header>
                   <div>ID</div>
                 </ion-col>
-                <ion-col bordered>
+                <ion-col bordered school-header>
                   <div>Nome</div>
                 </ion-col>
-                <ion-col bordered>
+                <ion-col bordered school-header>
                   <div>Ações</div>
                 </ion-col>
               </ion-row>
@@ -70,7 +73,8 @@
               </ion-row>
               <ion-row>
                 <ion-col bordered size="12">
-                  <ion-button  size="medium" expand="block" [disabled]="hasDisplayAllSchools()" (click)="scrollMore()">Mais</ion-button>
+                  <ion-button size="medium" expand="block" [disabled]="hasDisplayAllSchools()" (click)="scrollMore()">
+                    Mais</ion-button>
                 </ion-col>
               </ion-row>
             </ion-grid>
@@ -79,22 +83,5 @@
       </ion-row>
     </ion-grid>
   </div>
-  <form *ngIf="isDisplayForm()" school-form #form="ngForm" (ngSubmit)="addSchool(form)">
-    <ion-grid>
-      <ion-row>
-        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-          <div padding>
-            <ion-item>
-              <ion-input name="name" type="text" placeholder="Nome da Escola" ngModel required></ion-input>
-            </ion-item>
-          </div>
-          <div padding>
-            <ion-button size="medium" expand="block" type="submit" [disabled]="form.invalid">
-              Adicionar Escola
-            </ion-button>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </form>
+  <app-school-form-add *ngIf="isDisplayForm()" (statusChanged)="childMdifyStatus($event)"></app-school-form-add>
 </ion-content>
